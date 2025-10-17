@@ -1,0 +1,420 @@
+/* App.css - Estilos Modernos e com Tema de IA (AJUSTADO PARA MAIOR TAMANHO GERAL) */
+
+/* Importa a fonte Inter e IBM Plex Mono */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+body {
+    background-color: #0A0A0E;
+    font-family: 'Inter', sans-serif;
+    color: #E0E0E0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    /* Remover justify-content e align-items para permitir que o .App cresça mais livremente */
+    /* display: flex; /* Mantém display flex mas remove centralização rígida para tela cheia */
+    /* justify-content: center; */
+    /* align-items: center; */
+    min-height: 100vh; /* Ocupa a altura total da viewport */
+}
+
+/* Contêiner principal da aplicação (.App) */
+.App {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Mantém itens centralizados HORIZONTALMENTE dentro do app */
+    /* justify-content: center; REMOVIDO para que o conteúdo possa se espalhar verticalmente */
+    position: relative;
+    background-color: #1A1A22;
+    padding: 3rem; /* Aumentado o padding para mais espaço interno */
+    border-radius: 1.5rem;
+    box-shadow: 0 0 30px rgba(0, 200, 255, 0.1), 0 0 15px rgba(0, 200, 255, 0.05);
+    border: 1px solid rgba(40, 40, 60, 0.5);
+    width: 90%; /* Continua ocupando 90% da largura do body */
+    max-width: 900px; /* *** AUMENTADO SIGNIFICATIVAMENTE O MAX-WIDTH AQUI *** */
+    margin: 3rem auto; /* Aumentado a margem vertical para mais espaço em cima/baixo e centralizado */
+    overflow: hidden;
+    background-image:
+        radial-gradient(circle at top left, rgba(14, 20, 30, 0.5) 0%, transparent 40%),
+        radial-gradient(circle at bottom right, rgba(20, 30, 40, 0.5) 0%, transparent 40%),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="rgba(255,255,255,0.02)"><rect x="0" y="0" width="100" height="100"/><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.05)"/></svg>') repeat;
+    min-height: 70vh; /* Garante uma altura mínima para o box principal */
+}
+
+/* Efeito de brilho de borda dinâmico para o .App */
+.App::before {
+    content: '';
+    position: absolute;
+    top: -5px; left: -5px; right: -5px; bottom: -5px;
+    background: linear-gradient(45deg, #00C8FF, #8A2BE2, #00C8FF);
+    background-size: 400% 400%;
+    z-index: -1;
+    filter: blur(15px);
+    opacity: 0.4;
+    animation: neon-border-pulse 5s infinite alternate;
+    border-radius: 1.7rem;
+}
+
+@keyframes neon-border-pulse {
+    0% { background-position: 0% 50%; opacity: 0.4; }
+    50% { background-position: 100% 50%; opacity: 0.6; }
+    100% { background-position: 0% 50%; opacity: 0.4; }
+}
+
+/* Estilos para os botões de navegação (Talk with AI, Generate Recipe, Generate Image) */
+.App > button {
+    padding: 1rem 2.5rem; /* Aumentado padding dos botões de navegação */
+    border-radius: 9999px;
+    font-weight: 600;
+    color: #E0E0E0;
+    background-color: rgba(30, 30, 40, 0.7);
+    border: 1px solid rgba(50, 50, 70, 0.6);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+    margin-bottom: 1.5rem; /* Aumentado espaçamento entre botões de navegação */
+    width: 70%; /* Levemente mais estreito, para ter mais contraste com a largura total */
+    max-width: 350px; /* Aumentado o max-width dos botões */
+    font-size: 1.1rem; /* Um pouco maior a fonte */
+}
+
+.App > button:hover {
+    background-color: rgba(40, 40, 50, 0.9);
+    border-color: rgba(0, 200, 255, 0.6);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 4px 15px rgba(0, 200, 255, 0.2), 0 0 20px rgba(0, 200, 255, 0.1);
+}
+
+.App > button.active {
+    background: linear-gradient(45deg, #00C8FF, #8A2BE2);
+    color: #FFFFFF;
+    border-color: #00C8FF;
+    box-shadow: 0 0 20px rgba(0, 200, 255, 0.5), 0 0 30px rgba(138, 43, 226, 0.3);
+    transform: scale(1.05);
+    font-weight: 700;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+}
+
+/* Contêiner de conteúdo de todas as abas (o div onde TalkWithAI, RecipeGenerator, ImageGenerator são renderizados) */
+.App > div:last-child {
+    background-color: rgba(26, 26, 34, 0.9);
+    padding: 2rem; /* Aumentado o padding interno do container da aba */
+    border-radius: 1rem;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4), 0 0 10px rgba(0, 200, 255, 0.08);
+    width: 95%; /* Ocupa quase toda a largura do .App */
+    max-width: 800px; /* *** AUMENTADO O MAX-WIDTH AQUI *** */
+    margin-top: 1.5rem; /* Aumentado espaçamento do último botão */
+    border: 1px solid rgba(40, 40, 60, 0.5);
+}
+
+/* Estilos para os Conteúdos Internos de CADA COMPONENTE de Aba */
+.App > div:last-child > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.8rem; /* Aumentado o espaçamento entre os elementos internos */
+    width: 100%;
+    text-align: center;
+}
+
+/* Estilos para o título h2 dentro de qualquer componente de aba */
+.App > div:last-child > div h2 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 2.5rem; /* Aumentado o tamanho da fonte do título */
+    color: #00C8FF;
+    text-shadow: 0 0 10px rgba(0, 200, 255, 0.5);
+    margin-bottom: 0;
+}
+
+/* Estilos para campos de input dentro de qualquer componente de aba */
+.App > div:last-child > div input[type="text"] {
+    background-color: #0A0A0E;
+    border: 1px solid rgba(0, 200, 255, 0.3);
+    border-radius: 0.5rem;
+    padding: 1rem 1.2rem; /* Aumentado padding do input */
+    color: #E0E0E0;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem; /* Aumentado tamanho da fonte do input */
+    width: 90%;
+    max-width: 550px; /* *** AUMENTADO O MAX-WIDTH DO INPUT *** */
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 0 5px rgba(0, 200, 255, 0.1);
+}
+
+.App > div:last-child > div input[type="text"]::placeholder {
+    color: rgba(224, 224, 224, 0.5);
+}
+
+.App > div:last-child > div input[type="text"]:focus {
+    border-color: #00C8FF;
+    box-shadow: 0 0 10px rgba(0, 200, 255, 0.6), inset 0 0 8px rgba(0, 200, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Estilos para o botão de ação principal dentro de qualquer componente de aba */
+.App > div:last-child > div > button:first-of-type {
+    background: linear-gradient(90deg, #8A2BE2, #00C8FF);
+    color: #FFFFFF;
+    padding: 1rem 2.5rem; /* Aumentado padding do botão de ação */
+    border-radius: 9999px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+    width: 70%;
+    max-width: 300px; /* Aumentado max-width do botão de ação */
+    font-size: 1.15rem; /* Aumentado tamanho da fonte */
+    margin-top: 0.8rem; /* Aumentado espaçamento superior */
+}
+
+.App > div:last-child > div > button:first-of-type:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(138, 43, 226, 0.6), 0 0 30px rgba(0, 200, 255, 0.3);
+}
+
+/* Estilos para a área de output (chatResponse e recipe) */
+.App > div:last-child > div .output {
+    background-color: rgba(14, 20, 30, 0.7);
+    border: 1px solid rgba(0, 200, 255, 0.2);
+    border-radius: 0.8rem;
+    padding: 2rem; /* Aumentado padding do output */
+    min-height: 150px; /* Aumentado altura mínima do output */
+    width: 90%;
+    max-width: 600px; /* *** AUMENTADO MAX-WIDTH DO OUTPUT *** */
+    text-align: left;
+    overflow-y: auto;
+    box-shadow: inset 0 0 10px rgba(0, 200, 255, 0.1);
+    word-wrap: break-word;
+}
+
+.App > div:last-child > div .output p {
+    margin: 0;
+    color: #B0B0B0;
+    line-height: 1.7; /* Aumentado line-height para melhor leitura */
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1rem; /* Aumentado tamanho da fonte do output */
+}
+
+/* --- ESTILOS ESPECÍFICOS PARA O IMAGE GENERATOR --- */
+
+/* Contêiner do grid de imagens */
+.App > div:last-child > div .image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Aumentado minmax para imagens maiores */
+    gap: 1.5rem; /* Aumentado espaçamento entre as imagens */
+    width: 100%;
+    max-width: 680px; /* *** AUMENTADO MAX-WIDTH DO GRID DE IMAGENS *** */
+    margin-top: 1rem;
+    justify-content: center;
+}
+
+/* Estilos para as imagens dentro do grid */
+.image-grid img {
+    width: 100%;
+    height: 150px; /* Aumentado altura das imagens */
+    object-fit: cover;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(0, 200, 255, 0.2);
+    box-shadow: 0 0 10px rgba(0, 200, 255, 0.2);
+    transition: transform 0.2s ease-in-out;
+}
+
+.image-grid img:hover {
+    transform: scale(1.05);
+}
+
+/* Estilos para os slots vazios no grid */
+.empty-image-slot {
+    width: 100%;
+    height: 150px; /* Mesma altura das imagens */
+    background-color: rgba(30, 30, 40, 0.7);
+    border: 1px dashed rgba(50, 50, 70, 0.6);
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(224, 224, 224, 0.4);
+    font-size: 1rem; /* Aumentado tamanho da fonte do slot */
+    font-family: 'IBM Plex Mono', monospace;
+    position: relative;
+}
+
+.empty-image-slot:empty::before {
+    content: "Empty slot";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+}
+
+/* --- ESTILOS PARA OS BOTÕES DE PAGINAÇÃO (DENTRO DO IMAGE GENERATOR) --- */
+.App > div:last-child > div > div:last-child {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem; /* Aumentado espaçamento entre botões de paginação */
+    margin-top: 2rem; /* Aumentado margem superior para mais espaço */
+    width: 100%;
+    max-width: 600px; /* Alinhe com o max-width dos inputs */
+}
+
+/* Estiliza os botões dentro do div de paginação */
+.App > div:last-child > div > div:last-child button {
+    background-color: rgba(30, 30, 40, 0.7);
+    border: 1px solid rgba(50, 50, 70, 0.6);
+    color: #E0E0E0;
+    padding: 0.6rem 1rem; /* Aumentado padding */
+    border-radius: 0.5rem;
+    font-size: 1rem; /* Aumentado tamanho da fonte */
+    font-weight: 600;
+    min-width: 50px; /* Aumentado largura mínima */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    background: none;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+.App > div:last-child > div > div:last-child button:hover {
+    background-color: rgba(40, 40, 50, 0.9);
+    border-color: rgba(0, 200, 255, 0.6);
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: 0 2px 8px rgba(0, 200, 255, 0.1);
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 1024px) { /* Adicionado um breakpoint maior para tablets */
+    .App {
+        max-width: 800px; /* Reduz um pouco o tamanho em telas de tablet */
+        padding: 2.5rem;
+    }
+    .App > div:last-child {
+        max-width: 700px;
+        padding: 1.8rem;
+    }
+    .App > div:last-child > div h2 {
+        font-size: 2.2rem;
+    }
+    .App > div:last-child > div input[type="text"] {
+        max-width: 500px;
+    }
+    .App > div:last-child > div .output {
+        max-width: 550px;
+    }
+    .App > div:last-child > div .image-grid {
+        max-width: 600px;
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    }
+    .image-grid img, .empty-image-slot {
+        height: 130px;
+    }
+    .App > div:last-child > div > div:last-child {
+        max-width: 550px;
+    }
+}
+
+@media (max-width: 768px) {
+    .App {
+        padding: 1.5rem;
+        max-width: 95%;
+        margin: 1.5rem auto;
+        min-height: unset; /* Remove min-height para telas menores */
+    }
+    .App > button {
+        padding: 0.7rem 1.5rem;
+        width: 90%;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+    .App > div:last-child {
+        padding: 1.2rem;
+        max-width: 95%;
+    }
+    .App > div:last-child > div {
+        gap: 1.2rem;
+    }
+    .App > div:last-child > div h2 {
+        font-size: 1.8rem;
+    }
+    .App > div:last-child > div input[type="text"],
+    .App > div:last-child > div > button:first-of-type,
+    .App > div:last-child > div .output {
+        width: 95%;
+        max-width: none; /* Remove limitação de largura em telas pequenas */
+    }
+    .App > div:last-child > div .output {
+        padding: 1.5rem;
+        min-height: 120px;
+    }
+    .App > div:last-child > div .output p {
+        font-size: 0.9rem;
+    }
+
+    .App > div:last-child > div .image-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        max-width: 95%;
+        gap: 1rem;
+    }
+    .image-grid img, .empty-image-slot {
+        height: 100px;
+    }
+    .App > div:last-child > div > div:last-child {
+        max-width: 95%;
+        margin-top: 1.5rem;
+    }
+    .App > div:last-child > div > div:last-child button {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
+        min-width: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .App {
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+    .App > button {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+        margin-bottom: 0.8rem;
+    }
+    .App > div:last-child {
+        padding: 0.8rem;
+    }
+    .App > div:last-child > div {
+        gap: 1rem;
+    }
+    .App > div:last-child > div h2 {
+        font-size: 1.5rem;
+    }
+    .App > div:last-child > div input[type="text"],
+    .App > div:last-child > div > button:first-of-type {
+        font-size: 0.85rem;
+        padding: 0.7rem;
+    }
+    .App > div:last-child > div .output {
+        padding: 1rem;
+        min-height: 100px;
+    }
+    .App > div:last-child > div .output p {
+        font-size: 0.8rem;
+    }
+    .App > div:last-child > div .image-grid {
+        grid-template-columns: repeat(2, 1fr); /* Força 2 colunas em telas muito pequenas */
+        gap: 0.8rem;
+    }
+    .image-grid img, .empty-image-slot {
+        height: 80px;
+    }
+    .App > div:last-child > div > div:last-child button {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
+        min-width: 30px;
+    }
+}

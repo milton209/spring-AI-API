@@ -1,0 +1,21 @@
+# Ignorar arquivos do Java/Spring
+/backend/target/
+/backend/build/
+*.class
+*.jar
+*.war
+.settings/
+.project
+.classpath
+
+# Ignorar arquivos do Node.js
+/frontend/node_modules/
+/frontend/build/
+/frontend/.cache/
+npm-debug.log
+yarn-error.log
+
+# Ignorar arquivos de IDE
+.idea/
+.vscode/
+*.iml
