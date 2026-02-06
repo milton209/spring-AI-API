@@ -1,6 +1,6 @@
 # Ignorar arquivos do Java/Spring
-/backend/target/
-/backend/build/
+**/target/
+**/build/
 *.class
 *.jar
 *.war

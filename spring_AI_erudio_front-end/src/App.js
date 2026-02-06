@@ -10,37 +10,45 @@ function App() {
   const [activeTab, setactiveTab] = useState('ask-ai')
 
   const handleTabChange = (tab) =>{
-   // alert(tab);
     setactiveTab(tab);
   }
 
   return (
     <div className="App">
+      <header className="app-header">
+        <h1>🤖 AI Erudio</h1>
+        <p className="subtitle">Seu assistente de IA pessoal</p>
+      </header>
 
-      <button 
-      className={activeTab === 'ask-ai' ? 'active' : ''}
-      onClick={() => handleTabChange('ask-ai')}>
-        Talk with AI
+      <nav className="app-nav">
+        <button 
+          className={`nav-button ${activeTab === 'ask-ai' ? 'active' : ''}`}
+          onClick={() => handleTabChange('ask-ai')}>
+          💬 Chat com IA
         </button>
 
-      <button 
-      className={activeTab === 'recipe-generator' ? 'active' : ''}
-      onClick={() => handleTabChange('recipe-generator')}>
-        Generate Recipe
+        <button 
+          className={`nav-button ${activeTab === 'recipe-generator' ? 'active' : ''}`}
+          onClick={() => handleTabChange('recipe-generator')}>
+          👨‍🍳 Gerar Receitas
         </button>
 
-      <button 
-      className={activeTab === 'image-generator' ? 'active' : ''}
-      onClick={() => handleTabChange('image-generator')}>
-        Generate Image
+        <button 
+          className={`nav-button ${activeTab === 'image-generator' ? 'active' : ''}`}
+          onClick={() => handleTabChange('image-generator')}>
+          🖼️ Gerar Imagens
         </button>
+      </nav>
 
-      <div>
+      <main className="app-main">
         {activeTab === 'ask-ai' && <TalkWithAI/>}
         {activeTab === 'recipe-generator' && <RecipeGenerator/>}
         {activeTab === 'image-generator' && <ImageGenerator/>}
-      </div>
+      </main>
 
+      <footer className="app-footer">
+        <p>&copy; 2026 AI Erudio. Todos os direitos reservados.</p>
+      </footer>
     </div>
   );
 }

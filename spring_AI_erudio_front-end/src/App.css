@@ -1,420 +1,602 @@
-/* App.css - Estilos Modernos e com Tema de IA (AJUSTADO PARA MAIOR TAMANHO GERAL) */
-
-/* Importa a fonte Inter e IBM Plex Mono */
+/* Importa fontes */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap');
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    background-color: #0A0A0E;
+    background: linear-gradient(135deg, #0A0A0E 0%, #1A1A2E 100%);
     font-family: 'Inter', sans-serif;
     color: #E0E0E0;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    min-height: 100vh;
     overflow-x: hidden;
-    /* Remover justify-content e align-items para permitir que o .App cresça mais livremente */
-    /* display: flex; /* Mantém display flex mas remove centralização rígida para tela cheia */
-    /* justify-content: center; */
-    /* align-items: center; */
-    min-height: 100vh; /* Ocupa a altura total da viewport */
 }
 
-/* Contêiner principal da aplicação (.App) */
+/* App Container */
 .App {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Mantém itens centralizados HORIZONTALMENTE dentro do app */
-    /* justify-content: center; REMOVIDO para que o conteúdo possa se espalhar verticalmente */
-    position: relative;
-    background-color: #1A1A22;
-    padding: 3rem; /* Aumentado o padding para mais espaço interno */
-    border-radius: 1.5rem;
-    box-shadow: 0 0 30px rgba(0, 200, 255, 0.1), 0 0 15px rgba(0, 200, 255, 0.05);
-    border: 1px solid rgba(40, 40, 60, 0.5);
-    width: 90%; /* Continua ocupando 90% da largura do body */
-    max-width: 900px; /* *** AUMENTADO SIGNIFICATIVAMENTE O MAX-WIDTH AQUI *** */
-    margin: 3rem auto; /* Aumentado a margem vertical para mais espaço em cima/baixo e centralizado */
-    overflow: hidden;
-    background-image:
-        radial-gradient(circle at top left, rgba(14, 20, 30, 0.5) 0%, transparent 40%),
-        radial-gradient(circle at bottom right, rgba(20, 30, 40, 0.5) 0%, transparent 40%),
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="rgba(255,255,255,0.02)"><rect x="0" y="0" width="100" height="100"/><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.05)"/></svg>') repeat;
-    min-height: 70vh; /* Garante uma altura mínima para o box principal */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0A0A0E 0%, #1A1A2E 100%);
 }
 
-/* Efeito de brilho de borda dinâmico para o .App */
-.App::before {
-    content: '';
-    position: absolute;
-    top: -5px; left: -5px; right: -5px; bottom: -5px;
-    background: linear-gradient(45deg, #00C8FF, #8A2BE2, #00C8FF);
-    background-size: 400% 400%;
-    z-index: -1;
-    filter: blur(15px);
-    opacity: 0.4;
-    animation: neon-border-pulse 5s infinite alternate;
-    border-radius: 1.7rem;
+/* Header */
+.app-header {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(0, 200, 255, 0.1) 0%, rgba(138, 43, 226, 0.1) 100%);
+  border-bottom: 1px solid rgba(0, 200, 255, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 200, 255, 0.1);
 }
 
-@keyframes neon-border-pulse {
-    0% { background-position: 0% 50%; opacity: 0.4; }
-    50% { background-position: 100% 50%; opacity: 0.6; }
-    100% { background-position: 0% 50%; opacity: 0.4; }
+.app-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #00C8FF, #8A2BE2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
 }
 
-/* Estilos para os botões de navegação (Talk with AI, Generate Recipe, Generate Image) */
-.App > button {
-    padding: 1rem 2.5rem; /* Aumentado padding dos botões de navegação */
-    border-radius: 9999px;
-    font-weight: 600;
-    color: #E0E0E0;
-    background-color: rgba(30, 30, 40, 0.7);
-    border: 1px solid rgba(50, 50, 70, 0.6);
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
-    margin-bottom: 1.5rem; /* Aumentado espaçamento entre botões de navegação */
-    width: 70%; /* Levemente mais estreito, para ter mais contraste com a largura total */
-    max-width: 350px; /* Aumentado o max-width dos botões */
-    font-size: 1.1rem; /* Um pouco maior a fonte */
+.subtitle {
+  font-size: 1rem;
+  color: #A0A0B0;
+  font-weight: 300;
 }
 
-.App > button:hover {
-    background-color: rgba(40, 40, 50, 0.9);
-    border-color: rgba(0, 200, 255, 0.6);
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 4px 15px rgba(0, 200, 255, 0.2), 0 0 20px rgba(0, 200, 255, 0.1);
+/* Navigation */
+.app-nav {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: rgba(20, 20, 40, 0.6);
+  border-bottom: 1px solid rgba(0, 200, 255, 0.2);
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.App > button.active {
-    background: linear-gradient(45deg, #00C8FF, #8A2BE2);
-    color: #FFFFFF;
-    border-color: #00C8FF;
-    box-shadow: 0 0 20px rgba(0, 200, 255, 0.5), 0 0 30px rgba(138, 43, 226, 0.3);
-    transform: scale(1.05);
-    font-weight: 700;
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+.nav-button {
+  padding: 0.75rem 1.5rem;
+  border: 1px solid rgba(0, 200, 255, 0.3);
+  background: rgba(0, 200, 255, 0.05);
+  color: #E0E0E0;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
 }
 
-/* Contêiner de conteúdo de todas as abas (o div onde TalkWithAI, RecipeGenerator, ImageGenerator são renderizados) */
-.App > div:last-child {
-    background-color: rgba(26, 26, 34, 0.9);
-    padding: 2rem; /* Aumentado o padding interno do container da aba */
-    border-radius: 1rem;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4), 0 0 10px rgba(0, 200, 255, 0.08);
-    width: 95%; /* Ocupa quase toda a largura do .App */
-    max-width: 800px; /* *** AUMENTADO O MAX-WIDTH AQUI *** */
-    margin-top: 1.5rem; /* Aumentado espaçamento do último botão */
-    border: 1px solid rgba(40, 40, 60, 0.5);
+.nav-button:hover {
+  background: rgba(0, 200, 255, 0.15);
+  border-color: rgba(0, 200, 255, 0.6);
+  box-shadow: 0 0 10px rgba(0, 200, 255, 0.3);
 }
 
-/* Estilos para os Conteúdos Internos de CADA COMPONENTE de Aba */
-.App > div:last-child > div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.8rem; /* Aumentado o espaçamento entre os elementos internos */
-    width: 100%;
-    text-align: center;
+.nav-button.active {
+  background: linear-gradient(135deg, #00C8FF, #8A2BE2);
+  border-color: #00C8FF;
+  color: #0A0A0E;
+  box-shadow: 0 0 20px rgba(0, 200, 255, 0.5);
 }
 
-/* Estilos para o título h2 dentro de qualquer componente de aba */
-.App > div:last-child > div h2 {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 2.5rem; /* Aumentado o tamanho da fonte do título */
-    color: #00C8FF;
-    text-shadow: 0 0 10px rgba(0, 200, 255, 0.5);
-    margin-bottom: 0;
+/* Main Content */
+.app-main {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
-/* Estilos para campos de input dentro de qualquer componente de aba */
-.App > div:last-child > div input[type="text"] {
-    background-color: #0A0A0E;
-    border: 1px solid rgba(0, 200, 255, 0.3);
-    border-radius: 0.5rem;
-    padding: 1rem 1.2rem; /* Aumentado padding do input */
-    color: #E0E0E0;
-    font-family: 'Inter', sans-serif;
-    font-size: 1.1rem; /* Aumentado tamanho da fonte do input */
-    width: 90%;
-    max-width: 550px; /* *** AUMENTADO O MAX-WIDTH DO INPUT *** */
-    outline: none;
-    transition: all 0.3s ease;
-    box-shadow: inset 0 0 5px rgba(0, 200, 255, 0.1);
+/* Footer */
+.app-footer {
+  text-align: center;
+  padding: 1.5rem;
+  background: rgba(20, 20, 40, 0.6);
+  border-top: 1px solid rgba(0, 200, 255, 0.2);
+  color: #707080;
+  font-size: 0.9rem;
 }
 
-.App > div:last-child > div input[type="text"]::placeholder {
-    color: rgba(224, 224, 224, 0.5);
+/* ===== CHAT COMPONENT ===== */
+.talk-with-ai {
+  width: 100%;
+  max-width: 800px;
 }
 
-.App > div:last-child > div input[type="text"]:focus {
-    border-color: #00C8FF;
-    box-shadow: 0 0 10px rgba(0, 200, 255, 0.6), inset 0 0 8px rgba(0, 200, 255, 0.2);
-    transform: translateY(-2px);
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+  background: rgba(30, 30, 50, 0.8);
+  border: 1px solid rgba(0, 200, 255, 0.2);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-/* Estilos para o botão de ação principal dentro de qualquer componente de aba */
-.App > div:last-child > div > button:first-of-type {
-    background: linear-gradient(90deg, #8A2BE2, #00C8FF);
-    color: #FFFFFF;
-    padding: 1rem 2.5rem; /* Aumentado padding do botão de ação */
-    border-radius: 9999px;
-    font-weight: 700;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
-    width: 70%;
-    max-width: 300px; /* Aumentado max-width do botão de ação */
-    font-size: 1.15rem; /* Aumentado tamanho da fonte */
-    margin-top: 0.8rem; /* Aumentado espaçamento superior */
+.messages-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.App > div:last-child > div > button:first-of-type:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 20px rgba(138, 43, 226, 0.6), 0 0 30px rgba(0, 200, 255, 0.3);
+.messages-list::-webkit-scrollbar {
+  width: 6px;
 }
 
-/* Estilos para a área de output (chatResponse e recipe) */
-.App > div:last-child > div .output {
-    background-color: rgba(14, 20, 30, 0.7);
-    border: 1px solid rgba(0, 200, 255, 0.2);
-    border-radius: 0.8rem;
-    padding: 2rem; /* Aumentado padding do output */
-    min-height: 150px; /* Aumentado altura mínima do output */
-    width: 90%;
-    max-width: 600px; /* *** AUMENTADO MAX-WIDTH DO OUTPUT *** */
-    text-align: left;
-    overflow-y: auto;
-    box-shadow: inset 0 0 10px rgba(0, 200, 255, 0.1);
-    word-wrap: break-word;
+.messages-list::-webkit-scrollbar-track {
+  background: rgba(0, 200, 255, 0.05);
 }
 
-.App > div:last-child > div .output p {
-    margin: 0;
-    color: #B0B0B0;
-    line-height: 1.7; /* Aumentado line-height para melhor leitura */
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 1rem; /* Aumentado tamanho da fonte do output */
+.messages-list::-webkit-scrollbar-thumb {
+  background: rgba(0, 200, 255, 0.3);
+  border-radius: 3px;
 }
 
-/* --- ESTILOS ESPECÍFICOS PARA O IMAGE GENERATOR --- */
-
-/* Contêiner do grid de imagens */
-.App > div:last-child > div .image-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Aumentado minmax para imagens maiores */
-    gap: 1.5rem; /* Aumentado espaçamento entre as imagens */
-    width: 100%;
-    max-width: 680px; /* *** AUMENTADO MAX-WIDTH DO GRID DE IMAGENS *** */
-    margin-top: 1rem;
-    justify-content: center;
+.message {
+  display: flex;
+  animation: fadeIn 0.3s ease-in;
 }
 
-/* Estilos para as imagens dentro do grid */
-.image-grid img {
-    width: 100%;
-    height: 150px; /* Aumentado altura das imagens */
-    object-fit: cover;
-    border-radius: 0.5rem;
-    border: 1px solid rgba(0, 200, 255, 0.2);
-    box-shadow: 0 0 10px rgba(0, 200, 255, 0.2);
-    transition: transform 0.2s ease-in-out;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.image-grid img:hover {
-    transform: scale(1.05);
+.message.user {
+  justify-content: flex-end;
 }
 
-/* Estilos para os slots vazios no grid */
-.empty-image-slot {
-    width: 100%;
-    height: 150px; /* Mesma altura das imagens */
-    background-color: rgba(30, 30, 40, 0.7);
-    border: 1px dashed rgba(50, 50, 70, 0.6);
-    border-radius: 0.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: rgba(224, 224, 224, 0.4);
-    font-size: 1rem; /* Aumentado tamanho da fonte do slot */
-    font-family: 'IBM Plex Mono', monospace;
-    position: relative;
+.message.bot {
+  justify-content: flex-start;
 }
 
-.empty-image-slot:empty::before {
-    content: "Empty slot";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    white-space: nowrap;
+.message-content {
+  max-width: 70%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  word-wrap: break-word;
 }
 
-/* --- ESTILOS PARA OS BOTÕES DE PAGINAÇÃO (DENTRO DO IMAGE GENERATOR) --- */
-.App > div:last-child > div > div:last-child {
-    display: flex;
-    justify-content: center;
-    gap: 0.8rem; /* Aumentado espaçamento entre botões de paginação */
-    margin-top: 2rem; /* Aumentado margem superior para mais espaço */
-    width: 100%;
-    max-width: 600px; /* Alinhe com o max-width dos inputs */
+.message.user .message-content {
+  background: linear-gradient(135deg, #00C8FF, #8A2BE2);
+  color: #0A0A0E;
+  border-radius: 0.5rem 0.5rem 0 0.5rem;
 }
 
-/* Estiliza os botões dentro do div de paginação */
-.App > div:last-child > div > div:last-child button {
-    background-color: rgba(30, 30, 40, 0.7);
-    border: 1px solid rgba(50, 50, 70, 0.6);
-    color: #E0E0E0;
-    padding: 0.6rem 1rem; /* Aumentado padding */
-    border-radius: 0.5rem;
-    font-size: 1rem; /* Aumentado tamanho da fonte */
-    font-weight: 600;
-    min-width: 50px; /* Aumentado largura mínima */
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    background: none;
-    box-shadow: none;
-    text-shadow: none;
+.message.bot .message-content {
+  background: rgba(50, 50, 80, 0.8);
+  color: #E0E0E0;
+  border: 1px solid rgba(0, 200, 255, 0.2);
+  border-radius: 0.5rem 0.5rem 0.5rem 0;
 }
 
-.App > div:last-child > div > div:last-child button:hover {
-    background-color: rgba(40, 40, 50, 0.9);
-    border-color: rgba(0, 200, 255, 0.6);
-    transform: translateY(-1px) scale(1.02);
-    box-shadow: 0 2px 8px rgba(0, 200, 255, 0.1);
+.timestamp {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  margin-top: 0.25rem;
+  display: block;
 }
 
-/* Media Queries para Responsividade */
-@media (max-width: 1024px) { /* Adicionado um breakpoint maior para tablets */
-    .App {
-        max-width: 800px; /* Reduz um pouco o tamanho em telas de tablet */
-        padding: 2.5rem;
-    }
-    .App > div:last-child {
-        max-width: 700px;
-        padding: 1.8rem;
-    }
-    .App > div:last-child > div h2 {
-        font-size: 2.2rem;
-    }
-    .App > div:last-child > div input[type="text"] {
-        max-width: 500px;
-    }
-    .App > div:last-child > div .output {
-        max-width: 550px;
-    }
-    .App > div:last-child > div .image-grid {
-        max-width: 600px;
-        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    }
-    .image-grid img, .empty-image-slot {
-        height: 130px;
-    }
-    .App > div:last-child > div > div:last-child {
-        max-width: 550px;
-    }
+.typing-indicator {
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+  height: 1rem;
 }
 
+.typing-indicator span {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: #00C8FF;
+  animation: bounce 1.4s infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0%, 60%, 100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-0.5rem);
+  }
+}
+
+.chat-form {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: rgba(20, 20, 40, 0.8);
+  border-top: 1px solid rgba(0, 200, 255, 0.2);
+}
+
+.chat-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(0, 200, 255, 0.3);
+  background: rgba(30, 30, 50, 0.9);
+  color: #E0E0E0;
+  border-radius: 0.5rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.chat-input:focus {
+  outline: none;
+  border-color: #00C8FF;
+  box-shadow: 0 0 10px rgba(0, 200, 255, 0.3);
+  background: rgba(30, 30, 50, 1);
+}
+
+.chat-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.send-button {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #00C8FF, #8A2BE2);
+  border: none;
+  color: #0A0A0E;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+}
+
+.send-button:hover:not(:disabled) {
+  box-shadow: 0 0 20px rgba(0, 200, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.send-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ===== IMAGE GENERATOR ===== */
+.image-generator {
+  width: 100%;
+  max-width: 1000px;
+}
+
+.generator-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  background: rgba(30, 30, 50, 0.8);
+  border: 1px solid rgba(0, 200, 255, 0.2);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-section h2 {
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, #00C8FF, #8A2BE2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #00C8FF;
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 0.75rem;
+  border: 1px solid rgba(0, 200, 255, 0.3);
+  background: rgba(20, 20, 40, 0.9);
+  color: #E0E0E0;
+  border-radius: 0.5rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #00C8FF;
+  box-shadow: 0 0 10px rgba(0, 200, 255, 0.3);
+  background: rgba(20, 20, 40, 1);
+}
+
+.form-group input:disabled,
+.form-group textarea:disabled,
+.form-group select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.prompt-input,
+.ingredients-input {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.generate-button {
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #00C8FF, #8A2BE2);
+  border: none;
+  color: #0A0A0E;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.generate-button:hover:not(:disabled) {
+  box-shadow: 0 0 20px rgba(0, 200, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.generate-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error-message {
+  padding: 1rem;
+  background: rgba(255, 50, 50, 0.2);
+  border: 1px solid rgba(255, 50, 50, 0.5);
+  color: #FF8080;
+  border-radius: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.images-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.image-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border: 1px solid rgba(0, 200, 255, 0.2);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.image-item:hover {
+  border-color: rgba(0, 200, 255, 0.6);
+  box-shadow: 0 0 15px rgba(0, 200, 255, 0.2);
+}
+
+.image-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  max-height: 400px;
+}
+
+.download-btn {
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, #00C8FF, #8A2BE2);
+  border: none;
+  color: #0A0A0E;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.download-btn:hover {
+  box-shadow: 0 0 10px rgba(0, 200, 255, 0.5);
+}
+
+/* ===== RECIPE GENERATOR ===== */
+.recipe-generator {
+  width: 100%;
+  max-width: 1000px;
+}
+
+.recipe-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  background: rgba(30, 30, 50, 0.8);
+  border: 1px solid rgba(0, 200, 255, 0.2);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.recipe-output {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(0, 200, 255, 0.2);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background: rgba(20, 20, 40, 0.5);
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.recipe-output::-webkit-scrollbar {
+  width: 6px;
+}
+
+.recipe-output::-webkit-scrollbar-track {
+  background: rgba(0, 200, 255, 0.05);
+}
+
+.recipe-output::-webkit-scrollbar-thumb {
+  background: rgba(0, 200, 255, 0.3);
+  border-radius: 3px;
+}
+
+.recipe-content {
+  line-height: 1.6;
+}
+
+.recipe-content h1,
+.recipe-content h2,
+.recipe-content h3 {
+  color: #00C8FF;
+  margin: 1rem 0 0.5rem 0;
+}
+
+.recipe-content ul,
+.recipe-content ol {
+  margin: 0.5rem 0 0.5rem 1.5rem;
+}
+
+.recipe-content li {
+  margin: 0.3rem 0;
+}
+
+.placeholder-message,
+.loading-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  color: #707080;
+}
+
+.placeholder-message p,
+.loading-message p {
+  font-size: 1.1rem;
+  margin-top: 1rem;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0, 200, 255, 0.1);
+  border-top-color: #00C8FF;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-    .App {
-        padding: 1.5rem;
-        max-width: 95%;
-        margin: 1.5rem auto;
-        min-height: unset; /* Remove min-height para telas menores */
-    }
-    .App > button {
-        padding: 0.7rem 1.5rem;
-        width: 90%;
-        font-size: 1rem;
-        margin-bottom: 1rem;
-    }
-    .App > div:last-child {
-        padding: 1.2rem;
-        max-width: 95%;
-    }
-    .App > div:last-child > div {
-        gap: 1.2rem;
-    }
-    .App > div:last-child > div h2 {
-        font-size: 1.8rem;
-    }
-    .App > div:last-child > div input[type="text"],
-    .App > div:last-child > div > button:first-of-type,
-    .App > div:last-child > div .output {
-        width: 95%;
-        max-width: none; /* Remove limitação de largura em telas pequenas */
-    }
-    .App > div:last-child > div .output {
-        padding: 1.5rem;
-        min-height: 120px;
-    }
-    .App > div:last-child > div .output p {
-        font-size: 0.9rem;
-    }
+  .app-header h1 {
+    font-size: 1.8rem;
+  }
 
-    .App > div:last-child > div .image-grid {
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-        max-width: 95%;
-        gap: 1rem;
-    }
-    .image-grid img, .empty-image-slot {
-        height: 100px;
-    }
-    .App > div:last-child > div > div:last-child {
-        max-width: 95%;
-        margin-top: 1.5rem;
-    }
-    .App > div:last-child > div > div:last-child button {
-        padding: 0.5rem 0.8rem;
-        font-size: 0.9rem;
-        min-width: 40px;
-    }
+  .app-nav {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .nav-button {
+    width: 100%;
+  }
+
+  .generator-container,
+  .recipe-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .message-content {
+    max-width: 85%;
+  }
+
+  .chat-container {
+    height: 400px;
+  }
 }
 
 @media (max-width: 480px) {
-    .App {
-        padding: 1rem;
-        border-radius: 1rem;
-    }
-    .App > button {
-        padding: 0.6rem 1.2rem;
-        font-size: 0.9rem;
-        margin-bottom: 0.8rem;
-    }
-    .App > div:last-child {
-        padding: 0.8rem;
-    }
-    .App > div:last-child > div {
-        gap: 1rem;
-    }
-    .App > div:last-child > div h2 {
-        font-size: 1.5rem;
-    }
-    .App > div:last-child > div input[type="text"],
-    .App > div:last-child > div > button:first-of-type {
-        font-size: 0.85rem;
-        padding: 0.7rem;
-    }
-    .App > div:last-child > div .output {
-        padding: 1rem;
-        min-height: 100px;
-    }
-    .App > div:last-child > div .output p {
-        font-size: 0.8rem;
-    }
-    .App > div:last-child > div .image-grid {
-        grid-template-columns: repeat(2, 1fr); /* Força 2 colunas em telas muito pequenas */
-        gap: 0.8rem;
-    }
-    .image-grid img, .empty-image-slot {
-        height: 80px;
-    }
-    .App > div:last-child > div > div:last-child button {
-        padding: 0.4rem 0.6rem;
-        font-size: 0.8rem;
-        min-width: 30px;
-    }
+  .App {
+    padding: 1rem;
+  }
+
+  .app-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .app-header {
+    padding: 1rem;
+  }
+
+  .app-main {
+    padding: 1rem;
+  }
+
+  .chat-container {
+    height: 300px;
+  }
+
+  .messages-list {
+    padding: 1rem;
+  }
 }
